@@ -9,7 +9,7 @@ addLayer("f", {
     color: "#B71C1C",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
     resource: "kills", // Name of prestige currency
-    baseResource: "shards", // Name of resource prestige is based on
+    baseResource: "power", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
@@ -23,9 +23,18 @@ addLayer("f", {
     upgrades: {
         11: {  
             title: "Boxing Gloves",
-            description: "Double your shards gain.",
-            cost: new Decimal(2),
+            description: "Double your power gain.",
+            cost: new Decimal(1),
             unlocked() {return hasUpgrade('f',11)}
+        },
+        12: {  
+            title: "Blood Powered",
+            description: "Power gain is based on kills.",
+            cost: new Decimal(2),
+            effect() {
+                return player[this.layer].points.add(1).pow(0.5)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
         },
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
@@ -35,4 +44,3 @@ addLayer("f", {
     layerShown(){return true}
 })
 
-    if (hasUpgrade('p', 11)) gain = gain.times(2)
