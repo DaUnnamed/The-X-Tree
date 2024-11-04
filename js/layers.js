@@ -26,6 +26,7 @@ addLayer("f", {
             description: "Double your shards gain.",
             cost: new Decimal(2),
         },
+
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
@@ -33,3 +34,4 @@ addLayer("f", {
     ],
     layerShown(){return true}
 })
+if (hasUpgrade('p', 11)) gain = gain.times(2)
