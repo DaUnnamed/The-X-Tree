@@ -6,7 +6,7 @@ addLayer("f", {
         unlocked: true,
 		points: new Decimal(0),
     }},
-    color: "#4BDC13",
+    color: "#B71C1C",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
     resource: "kills", // Name of prestige currency
     baseResource: "shards", // Name of resource prestige is based on
@@ -25,8 +25,8 @@ addLayer("f", {
             title: "Boxing Gloves",
             description: "Double your shards gain.",
             cost: new Decimal(2),
+            unlocked() {return hasUpgrade('f',11)}
         },
-
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
@@ -34,4 +34,5 @@ addLayer("f", {
     ],
     layerShown(){return true}
 })
-if (hasUpgrade('p', 11)) gain = gain.times(2)
+
+    if (hasUpgrade('p', 11)) gain = gain.times(2)
